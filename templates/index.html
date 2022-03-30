@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <script src="../style/app.js"></script>
     <title>Face Detection</title>
 </head>
 
@@ -40,14 +41,26 @@
     </div>
     <div id="detection">
         <p id="det-head">Facial Recognition</p>
-        <div id="choice">
-            <button class="choice-butt">Use Camera</button>
-            <button class="choice-butt">Input Video</button>
+        <div id="camera-faces">
+            <div id="camera-struct">
+                <div class="camera">
+                    <video id="video" style="display: none;">Video stream not available.</video>
+                </div>
+                <canvas id="canvas" style="display: none;">
+                </canvas>
+                <img id="photo">
+                <button class="choice-butt" id="stp-camera" style="margin-top: 3%;" onclick="StopCamera()">Stop Camera</button>
+            </div>
+            <div id="choice">
+                <button class="choice-butt" onclick="CameraStart()">Use Camera</button>
+                <button class="choice-butt">Input Video</button>
+            </div>
         </div>
     </div>
     <div id="about">
         <p id="name">Aryan Rishi Lamba</p>
-        <a id="proj-link" href="www.github.com/the-horseman/face-detection">www.github.com/the-horseman/face-detection<a>
+        <a id="proj-link"
+            href="https://github.com/the-horseman/Face-Detection">https://github.com/the-horseman/Face-Detection<a>
     </div>
 </body>
 

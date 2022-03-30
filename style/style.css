@@ -7,7 +7,7 @@ body {
 
 #bground {
   display: flex;
-  background-image: url("images/Bg-Image-1\(edited\).jpg");
+  background-image: url("images/Bg-Image-final.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   height: 32em;
@@ -46,6 +46,7 @@ body {
   font-size: 350%;
   line-height: 0%;
 }
+
 #proj-subj {
   background-color: #474747;
   padding: 0% 5% 0% 5%;
@@ -65,6 +66,27 @@ body {
   color: #ffcb74;
   font-size: 300%;
   line-height: 0%;
+}
+
+#photo {
+  border-radius: 25px;
+  box-shadow: 0px 15px 20px #000000;
+  width: 40%;
+  transform: scaleX(-1);
+}
+
+#camera-faces {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+#camera-struct {
+  display: none;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: space-around;
 }
 
 #choice {
@@ -95,7 +117,7 @@ body {
 }
 
 .choice-butt:active {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 #about {
