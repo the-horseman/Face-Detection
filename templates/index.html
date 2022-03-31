@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../style/app.js"></script>
     <title>Face Detection</title>
 </head>
@@ -17,7 +18,7 @@
     <div id="bground">
         <div id="quote">
             <p id="qte">Robots are not going to replace humans, they are going to make their jobs much more humane.</p>
-            <a id="goto" href="#detection">Go To Detection</a>
+            <a id="goto" onclick="ImidStrt()">Go To Detection</a>
         </div>
     </div>
     <div id="proj-desc">
@@ -49,11 +50,18 @@
                 <canvas id="canvas" style="display: none;">
                 </canvas>
                 <img id="photo">
-                <button class="choice-butt" id="stp-camera" style="margin-top: 3%;" onclick="StopCamera()">Stop Camera</button>
+                <button class="choice-butt" id="stp-camera" style="display: none;" onclick="StopCamera()">Stop
+                    Camera</button>
+                <button class="choice-butt" id="stp-video" style="display: none;" onclick="StopVideo()">Stop
+                    Video</button>
+                <form>
+                    <input type="file" id="inp" name="input_video" accept="video/mp4, video/mov" style="display: none;">
+                    <input type="reset" id="vid-res" style="display: none;">
+                </form>
             </div>
             <div id="choice">
                 <button class="choice-butt" onclick="CameraStart()">Use Camera</button>
-                <button class="choice-butt">Input Video</button>
+                <button class="choice-butt" onclick="VideoStart()">Input Video</button>
             </div>
         </div>
     </div>
