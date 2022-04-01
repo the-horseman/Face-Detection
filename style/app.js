@@ -109,3 +109,21 @@ function ImidStrt() {
         'scrollTop': $("#detection").position().top
     }, 1000);
 }
+
+function cnt_me() {
+    var nme = document.getElementById("fname").value;
+    var mal = document.getElementById("yrmail").value;
+    var mess = document.getElementById("message").value;
+
+    Email.send({
+        Host: "smtp.gmail.com",
+        Username: "contactmemail2002@gmail.com",
+        Password: "contactme123",
+        To: 'aryanrishi20@gmail.com',
+        From: "contactmemail2002@gmail.com",
+        Subject: "Contact Me Form",
+        Body: "Name => " + nme + "   Email => " + mal + "   Message => " + mess,
+    }).then(
+        message => alert(message)
+    );
+}
