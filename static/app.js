@@ -12,13 +12,13 @@ function CameraStart() {
     video = document.getElementById('video');
     canvas = document.getElementById('canvas');
     photo = document.getElementById('photo');
-    document.getElementById("stp-video").style.display = "none";
-    document.getElementById('choice').style.display = "none";
-    document.getElementById("stp-camera").style.display = "block";
     startbutton = document.getElementById('startbutton');
     navigator.mediaDevices.getUserMedia({ video: true, audio: false })
-        .then(function (stream) {
-            document.getElementById('camera-struct').style.display = "flex";
+    .then(function (stream) {
+        document.getElementById("stp-video").style.display = "none";
+        document.getElementById('choice').style.display = "none";
+        document.getElementById("stp-camera").style.display = "block";
+        document.getElementById('camera-struct').style.display = "flex";
             video.srcObject = stream;
             $('html, body').animate({
                 'scrollTop': $("#camera-struct").position().top
@@ -54,7 +54,16 @@ function TakePicture() {
         canvas.height = height;
         context.drawImage(video, 0, 0, width, height);
         var data = canvas.toDataURL('image/png');
-        photo.setAttribute('src', data);
+        let extra = {"image" : data};
+        fetch("/process", {
+            method:"POST",
+            body:JSON.stringify(extra)
+        }).then( (rsult) => {
+            return rsult.json(); 
+        }).then((res) => {
+            let img = res["img"];
+            photo.setAttribute('src', "data:image/png;base64," + img);
+        });
     }
 }
 
@@ -77,17 +86,17 @@ function stopStreamedVideo(videoElem) {
 
 function VideoStart() {
     document.getElementById("inp").click();
-    document.getElementById("choice").style.display = "none";
-    document.getElementById("stp-video").style.display = "block";
-    document.getElementById("stp-camera").style.display = "none";
     document.getElementById("inp").addEventListener("change", function () {
+        document.getElementById("choice").style.display = "none";
+        document.getElementById("stp-video").style.display = "block";
+        document.getElementById("stp-camera").style.display = "none";
         var media = URL.createObjectURL(this.files[0]);
-        document.getElementById("camera-struct").style.display = "flex";
         video = document.getElementById('video');
         canvas = document.getElementById('canvas');
         photo = document.getElementById('photo');
         console.log(media);
         video.src = media;
+        document.getElementById("camera-struct").style.display = "flex";
         $('html, body').animate({
             'scrollTop': $("#camera-struct").position().top
         }, 1000);
@@ -111,9 +120,9 @@ function ImidStrt() {
 }
 
 function cnt_me() {
-    var nme = document.getElementById("fname").value;
-    var mal = document.getElementById("yrmail").value;
-    var mess = document.getElementById("message").value;
+    let nme = document.getElementById("fnme").value;
+    let mal = document.getElementById("yrmail").value;
+    let mess = document.getElementById("message").value;
 
     Email.send({
         Host: "smtp.gmail.com",

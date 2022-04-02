@@ -12,7 +12,9 @@ html {
   background-image: url("images/Bg-Image-final.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  height: 32em;
+  min-height: 32em;
+  width: 100%;
+  height: max-content;
   background-attachment: fixed;
   justify-content: flex-start;
   align-items: center;
@@ -23,6 +25,7 @@ html {
   flex-direction: column;
   text-align: center;
   width: 30%;
+  min-width: 14em;
   margin-left: 5%;
   background-image: linear-gradient(to bottom right,
       rgba(255, 255, 255, 0.4),
@@ -107,6 +110,12 @@ html {
   justify-content: space-around;
 }
 
+@media only screen and (max-width: 550px) {
+  #camera-struct {
+    flex-direction: column;
+  }
+}
+
 #choice {
   display: flex;
   flex-direction: row;
@@ -125,6 +134,12 @@ html {
   transition: all 0.3s ease 0s;
   cursor: pointer;
   box-shadow: 0px 8px 15px #000000;
+}
+
+@media only screen and (max-width: 550px) {
+  .choice-butt {
+    margin-top: 5%;
+  }
 }
 
 .choice-butt:hover {
