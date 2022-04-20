@@ -34,15 +34,15 @@ function CameraStart() {
 function ShowOnCanvas(video) {
     video.addEventListener('canplay', function (ev) {
         if (!streaming) {
-            height = 150;
-            width = 200;
+            height = video.videoHeight/2;
+            width = video.videoWidth/2;
+            // height = 130;
+            // width = 200;
             canvas.setAttribute('width', width);
             canvas.setAttribute('height', height);
             streaming = true;
-            setInterval(function () {
-                if (streaming == true)
-                    TakePicture();
-            }, 10);
+            if (streaming == true)
+                TakePicture();
         }
     }, false);
 }
@@ -58,11 +58,14 @@ function TakePicture() {
         fetch("/process", {
             method:"POST",
             body:JSON.stringify(extra)
-        }).then( (rsult) => {
+        }).then((rsult) => {
             return rsult.json(); 
         }).then((res) => {
             let img = res["img"];
             photo.setAttribute('src', "data:image/png;base64," + img);
+            if (streaming == true) {
+                TakePicture()
+            }
         });
     }
 }

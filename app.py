@@ -3,14 +3,26 @@ import cv2
 import base64
 from mtcnn_cv2 import MTCNN
 import numpy as np
+import tensorflow as tf
 
 app = Flask(__name__)
-
+cnn = tf.keras.models.load_model("static/FaceModel.h5")
 
 @app.route("/")
 def start():
     return render_template("index.html")
 
+def cleanImg(frame=None):
+    frame = cv2.resize(frame, (200, 200),
+                       interpolation=cv2.INTER_NEAREST)
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    blur = cv2.GaussianBlur(gray, (3, 3), 1)
+    th3 = cv2.adaptiveThreshold(
+        blur, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 15, 2)
+    _, res = cv2.threshold(
+        th3, 70, 255, cv2.THRESH_BINARY_INV+cv2.THRESH_OTSU)
+    print(np.shape(res))
+    return res
 
 @app.route("/process", methods=["POST"])
 def ImgData():
@@ -32,8 +44,30 @@ def ImgData():
     return jsonify(dict)
 
 
-def ProcImage(image):
-    return image
+def ProcImage(frame):
+    detector = MTCNN()
+    ele = []
+    ext = detector.detect_faces(frame)
+    for i in ext:
+        v = i["box"]
+        ele.append(frame[v[1]:v[1]+v[3], v[0]:v[0]+v[2]])
+        cv2.rectangle(frame, (v[0], v[1]), (v[0]+v[2],
+                      v[1] + v[3]), (0, 155, 255), 4)
+    for i in ext:
+        v = i["box"]
+    for i in ele:
+        # img = cv2.resize(i, (200, 200))
+        # cv2.imwrite("ext2.jpg", img)
+        # img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        # cv2.imwrite("ext.jpg", img)
+        img = cleanImg(i)
+        img = np.expand_dims(img, axis=0)
+        result = cnn.predict(img)
+        val = result[0].argmax()
+        ls1 = ["Aryan", "Aviral", "Bhavna", "Jaidev", "Kaustav", "Raja", "Tanishka"]
+        print(result)
+        print(ls1[val])
+    return frame
 
 
 if __name__ == "__main__":
