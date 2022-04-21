@@ -62,9 +62,14 @@ function TakePicture() {
             return rsult.json(); 
         }).then((res) => {
             let img = res["img"];
+            let nme = res["name"]
+            document.getElementById("rec-face").innerHTML = "<p class='face-name'>" + nme + "</p>";
             photo.setAttribute('src', "data:image/png;base64," + img);
             if (streaming == true) {
                 TakePicture()
+            }
+            else {
+                document.getElementById("rec-face").innerHTML = "";
             }
         });
     }

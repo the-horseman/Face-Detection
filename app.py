@@ -38,13 +38,16 @@ def ImgData():
         img = cv2.imdecode(png_as_np, flags=1)
         # Decoded the imgae
 
-        img = ProcImage(img)
+        img, ans = ProcImage(img)
         string = base64.b64encode(cv2.imencode('.png', img)[1]).decode()
         dict['img'] = string
+        dict['name'] = ans
     return jsonify(dict)
 
 
 def ProcImage(frame):
+    ls1 = ["Aryan", "Aviral", "Bhavna", "Jaidev", "Kaustav", "Raja", "Tanishka", "None"]
+    val = 7
     detector = MTCNN()
     ele = []
     ext = detector.detect_faces(frame)
@@ -64,10 +67,9 @@ def ProcImage(frame):
         img = np.expand_dims(img, axis=0)
         result = cnn.predict(img)
         val = result[0].argmax()
-        ls1 = ["Aryan", "Aviral", "Bhavna", "Jaidev", "Kaustav", "Raja", "Tanishka"]
         print(result)
         print(ls1[val])
-    return frame
+    return (frame,ls1[val])
 
 
 if __name__ == "__main__":

@@ -116,6 +116,12 @@ html {
   }
 }
 
+.face-name {
+  color: #f6f6f6;
+  font-size: 180%;
+  line-height: 0%;
+}
+
 #choice {
   display: flex;
   flex-direction: row;
