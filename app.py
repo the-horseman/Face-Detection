@@ -46,8 +46,8 @@ def ImgData():
 
 
 def ProcImage(frame):
-    ls1 = ["Aryan", "Aviral", "Bhavna", "Jaidev", "Kaustav", "Raja", "Tanishka", "None"]
-    val = 7
+    ls1 = ["Amaan", "Aryan", "Aviral", "Himanshu", "Kanika", "Kaustav", "Raja", "Rishika", "Shanky", "Tanishka", "Vijit", "None"]
+    val = 11
     detector = MTCNN()
     ele = []
     ext = detector.detect_faces(frame)

@@ -34,8 +34,8 @@ function CameraStart() {
 function ShowOnCanvas(video) {
     video.addEventListener('canplay', function (ev) {
         if (!streaming) {
-            height = video.videoHeight/2;
-            width = video.videoWidth/2;
+            height = video.videoHeight;
+            width = video.videoWidth;
             // height = 130;
             // width = 200;
             canvas.setAttribute('width', width);
