@@ -3,7 +3,7 @@ import cv2
 import base64
 from mtcnn_cv2 import MTCNN
 import numpy as np
-import tensorflow as tf
+import tensorflow-cpu as tf
 
 app = Flask(__name__)
 cnn = tf.keras.models.load_model("static/FaceModel.h5")
